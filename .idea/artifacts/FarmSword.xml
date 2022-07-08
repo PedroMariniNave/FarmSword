@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="FarmSword">
+    <output-path>$USER_HOME$/Desktop/Teste isolado/plugins</output-path>
+    <root id="archive" name="FarmSword.jar">
+      <element id="module-output" name="FarmSword" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/de/tr7zw/item-nbt-api-plugin/2.9.2/item-nbt-api-plugin-2.9.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,266 @@
+Inventory:
+  title: "Evolução"
+  size: 45
+  item-slot: 12 # -1 = disabled
+  items:
+    1:
+      slot: 14
+      action: 'UPGRADE:QUALITY'
+      locked:
+        type: SKULL_ITEM
+        owner: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGYwZWYxNjc0YjcxZjhkYWQ3ZjU4ODJmMTNjZjI0MTE2NTNmNmEyZjllOTBlNDViMTgxZjQ0YjllZWYyNzhmZiJ9fX0=
+        name: "&cQualidade"
+        lore:
+          - '&7Melhorar a qualidade da sua espada'
+          - '&7resulta em um bônus, que é aplicado'
+          - '&7em todos encantamentos.'
+          - ''
+          - ' &8▶ &7Qualidade: {quality} &8➟ {quality_next}'
+          - ' &8▶ &7Bônus: &f{quality_bonus}x &8➟ &f{quality_next_bonus}x'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&cNecessário nível {required_level} ou superior!'
+      can-not-upgrade:
+        type: SKULL_ITEM
+        owner: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmQxMWM5NmRkMmI3NmQ4MWJmZjIyMDU5ZTQzMjc2NTc1NjY2OTU2Y2NhOGEzYTc1ODM1ZDA0MmFjYjNmNDI4YyJ9fX0=
+        name: "&cQualidade"
+        lore:
+          - '&7Melhorar a qualidade da sua espada'
+          - '&7resulta em um bônus, que é aplicado'
+          - '&7em todos encantamentos.'
+          - ''
+          - ' &8▶ &7Qualidade: {quality} &8➟ {quality_next}'
+          - ' &8▶ &7Bônus: &f{quality_bonus}x &8➟ &f{quality_next_bonus}x'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&cEsse item não possui cristais suficientes!'
+      can-upgrade:
+        type: SKULL_ITEM
+        owner: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODAzNzYyNTRkNTczNWFiMTU2N2IzZjg3YzdmYmRlNDFkZmM0MTYyMmI2NTEwYjY2N2Q4MmM5ZWZlOGE1Y2VkMSJ9fX0=
+        name: "&6Qualidade"
+        lore:
+          - '&7Melhorar a qualidade da sua espada'
+          - '&7resulta em um bônus, que é aplicado'
+          - '&7em todos encantamentos.'
+          - ''
+          - ' &8▶ &7Qualidade: {quality} &8➟ {quality_next}'
+          - ' &8▶ &7Bônus: &f{quality_bonus}x &8➟ &f{quality_next_bonus}x'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&7Clique para evoluir!'
+      max-level:
+        type: SKULL_ITEM
+        owner: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTRhODQ1NTVmZjM3NzljMjBmMDhjNDgzNTkyNTViZjlmODFmMWMzNjczYzYzOTgyNjE4YzY0MDYyZTg5MmFlMiJ9fX0=
+        name: "&6Qualidade"
+        lore:
+          - '&7Melhorar a qualidade da sua espada'
+          - '&7resulta em um bônus, que é aplicado'
+          - '&7em todos encantamentos.'
+          - ''
+          - ' &8▶ &7Qualidade: {quality}'
+          - ' &8▶ &7Bônus: &f{quality_bonus}x'
+          - ''
+          - '&cA qualidade já está no nível máximo!'
+    2:
+      slot: 29
+      action: 'UPGRADE:DAMAGE_ALL'
+      locked:
+        type: BARRIER
+        name: "&cAfiação"
+        lore:
+          - '&7Manter sua espada afiada pode'
+          - '&7ser útil para matar mobs com'
+          - '&7mais facilidade.'
+          - ''
+          - ' &8▶ &7Afiação: &f{damage_all} &8➟ &f{damage_all_next}'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&cNecessário nível {required_level} ou superior!'
+      can-not-upgrade:
+        type: REDSTONE
+        name: "&cAfiação"
+        lore:
+          - '&7Manter sua espada afiada pode'
+          - '&7ser útil para matar mobs com'
+          - '&7mais facilidade.'
+          - ''
+          - ' &8▶ &7Afiação: &f{damage_all} &8➟ &f{damage_all_next}'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&cEsse item não possui cristais suficientes!'
+      can-upgrade:
+        type: ENCHANTED_BOOK
+        name: "&aAfiação"
+        lore:
+          - '&7Manter sua espada afiada pode'
+          - '&7ser útil para matar mobs com'
+          - '&7mais facilidade.'
+          - ''
+          - ' &8▶ &7Afiação: &f{damage_all} &8➟ &f{damage_all_next}'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&7Clique para evoluir!'
+      max-level:
+        type: NETHER_STAR
+        name: "&aAfiação"
+        lore:
+          - '&7Manter sua espada afiada pode'
+          - '&7ser útil para matar mobs com'
+          - '&7mais facilidade.'
+          - ''
+          - ' &8▶ &7Afiação: &f{damage_all}'
+          - ''
+          - '&cEsse encantamento já está no nível máximo!'
+    3:
+      slot: 30
+      action: 'UPGRADE:DURABILITY'
+      locked:
+        type: BARRIER
+        name: "&cInquebrável"
+        lore:
+          - '&7A resistência da sua espada é'
+          - '&7importante para que ela não'
+          - '&7quebre inesperadamente.'
+          - ''
+          - ' &8▶ &7Inquebrável: &f{durability} &8➟ &f{durability_next}'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&cNecessário nível {required_level} ou superior!'
+      can-not-upgrade:
+        type: REDSTONE
+        name: "&cInquebrável"
+        lore:
+          - '&7A resistência da sua espada é'
+          - '&7importante para que ela não'
+          - '&7quebre inesperadamente.'
+          - ''
+          - ' &8▶ &7Inquebrável: &f{durability} &8➟ &f{durability_next}'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&cEsse item não possui cristais suficientes!'
+      can-upgrade:
+        type: ENCHANTED_BOOK
+        name: "&aInquebrável"
+        lore:
+          - '&7A resistência da sua espada é'
+          - '&7importante para que ela não'
+          - '&7quebre inesperadamente.'
+          - ''
+          - ' &8▶ &7Inquebrável: &f{durability} &8➟ &f{durability_next}'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&7Clique para evoluir!'
+      max-level:
+        type: NETHER_STAR
+        name: "&aInquebrável"
+        lore:
+          - '&7A resistência da sua espada é'
+          - '&7importante para que ela não'
+          - '&7quebre inesperadamente.'
+          - ''
+          - ' &8▶ &7Inquebrável: &f{durability}'
+          - ''
+          - '&cEsse encantamento já está no nível máximo!'
+    4:
+      slot: 32
+      action: 'UPGRADE:LOOT_BONUS_MOBS'
+      locked:
+        type: BARRIER
+        name: "&cPilhagem"
+        lore:
+          - '&7A pilhagem aumenta a quantia de'
+          - '&7drops obtidos ao matar um mob.'
+          - '&7Quanto maior a pilhagem, maior'
+          - '&7o número de drops obtidos.'
+          - ''
+          - ' &8▶ &7Pilhagem: &f{loot_bonus_mobs} &8➟ &f{loot_bonus_mobs_next}'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&cNecessário nível {required_level} ou superior!'
+      can-not-upgrade:
+        type: REDSTONE
+        name: "&cPilhagem"
+        lore:
+          - '&7A pilhagem aumenta a quantia de'
+          - '&7drops obtidos ao matar um mob.'
+          - '&7Quanto maior a pilhagem, maior'
+          - '&7o número de drops obtidos.'
+          - ''
+          - ' &8▶ &7Pilhagem: &f{loot_bonus_mobs} &8➟ &f{loot_bonus_mobs_next}'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&cEsse item não possui cristais suficientes!'
+      can-upgrade:
+        type: ENCHANTED_BOOK
+        name: "&aPilhagem"
+        lore:
+          - '&7A pilhagem aumenta a quantia de'
+          - '&7drops obtidos ao matar um mob.'
+          - '&7Quanto maior a pilhagem, maior'
+          - '&7o número de drops obtidos.'
+          - ''
+          - ' &8▶ &7Pilhagem: &f{loot_bonus_mobs} &8➟ &f{loot_bonus_mobs_next}'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&7Clique para evoluir!'
+      max-level:
+        type: NETHER_STAR
+        name: "&aPilhagem"
+        lore:
+          - '&7A resistência da sua espada é'
+          - '&7importante para que ela não'
+          - '&7quebre inesperadamente.'
+          - ''
+          - ' &8▶ &7Pilhagem: &f{loot_bonus_mobs}'
+          - ''
+          - '&cEsse encantamento já está no nível máximo!'
+    5:
+      slot: 33
+      action: 'UPGRADE:EXP'
+      locked:
+        type: BARRIER
+        name: "&cEXP"
+        lore:
+          - '&7Aumentando o EXP ganho, sua'
+          - '&7espada irá evoluir mais rápido.'
+          - ''
+          - ' &8▶ &7Nível: &f{exp} &8➟ &f{exp_next}'
+          - ' &8▶ &7Bônus: &f{exp_multiplier}x &8➟ &f{exp_next_multiplier}x'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&cNecessário nível {required_level} ou superior!'
+      can-not-upgrade:
+        type: REDSTONE
+        name: "&cEXP"
+        lore:
+          - '&7Aumentando o EXP ganho, sua'
+          - '&7matadora irá evoluir mais rápido.'
+          - ''
+          - ' &8▶ &7Nível: &f{exp} &8➟ &f{exp_next}'
+          - ' &8▶ &7Bônus: &f{exp_multiplier}x &8➟ &f{exp_next_multiplier}x'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&cEsse item não possui cristais suficientes!'
+      can-upgrade:
+        type: ENCHANTED_BOOK
+        name: "&6EXP"
+        lore:
+          - '&7Aumentando o EXP ganho, sua'
+          - '&7matadora irá evoluir mais rápido.'
+          - ''
+          - ' &8▶ &7Nível: &f{exp} &8➟ &f{exp_next}'
+          - ' &8▶ &7Bônus: &f{exp_multiplier}x &8➟ &f{exp_next_multiplier}x'
+          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ''
+          - '&7Clique para evoluir!'
+      max-level:
+        type: NETHER_STAR
+        name: "&6EXP"
+        lore:
+          - '&7Aumentando o EXP ganho, sua'
+          - '&7matadora irá evoluir mais rápido.'
+          - ''
+          - ' &8▶ &7Nível: &f{exp}'
+          - ' &8▶ &7Bônus: &f{exp_multiplier}x'
+          - ''
+          - '&cEsse encantamento já está no nível máximo!'
