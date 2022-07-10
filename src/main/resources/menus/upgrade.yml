@@ -17,7 +17,7 @@ Inventory:
           - ''
           - ' &8▶ &7Qualidade: {quality} &8➟ {quality_next}'
           - ' &8▶ &7Bônus: &f{quality_bonus}x &8➟ &f{quality_next_bonus}x'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ' &8▶ &7Custo: {cost}'
           - ''
           - '&cNecessário nível {required_level} ou superior!'
       can-not-upgrade:
@@ -31,13 +31,13 @@ Inventory:
           - ''
           - ' &8▶ &7Qualidade: {quality} &8➟ {quality_next}'
           - ' &8▶ &7Bônus: &f{quality_bonus}x &8➟ &f{quality_next_bonus}x'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ' &8▶ &7Custo: {cost}'
           - ''
-          - '&cEsse item não possui cristais suficientes!'
+          - '&cEsse item não possui cash suficiente!'
       can-upgrade:
         type: SKULL_ITEM
         owner: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODAzNzYyNTRkNTczNWFiMTU2N2IzZjg3YzdmYmRlNDFkZmM0MTYyMmI2NTEwYjY2N2Q4MmM5ZWZlOGE1Y2VkMSJ9fX0=
-        name: "&6Qualidade"
+        name: "&aQualidade"
         lore:
           - '&7Melhorar a qualidade da sua espada'
           - '&7resulta em um bônus, que é aplicado'
@@ -45,13 +45,13 @@ Inventory:
           - ''
           - ' &8▶ &7Qualidade: {quality} &8➟ {quality_next}'
           - ' &8▶ &7Bônus: &f{quality_bonus}x &8➟ &f{quality_next_bonus}x'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ' &8▶ &7Custo: {cost}'
           - ''
           - '&7Clique para evoluir!'
       max-level:
         type: SKULL_ITEM
         owner: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTRhODQ1NTVmZjM3NzljMjBmMDhjNDgzNTkyNTViZjlmODFmMWMzNjczYzYzOTgyNjE4YzY0MDYyZTg5MmFlMiJ9fX0=
-        name: "&6Qualidade"
+        name: "&aQualidade"
         lore:
           - '&7Melhorar a qualidade da sua espada'
           - '&7resulta em um bônus, que é aplicado'
@@ -243,7 +243,7 @@ Inventory:
           - '&cEsse item não possui cristais suficientes!'
       can-upgrade:
         type: ENCHANTED_BOOK
-        name: "&6EXP"
+        name: "&aEXP"
         lore:
           - '&7Aumentando o EXP ganho, sua'
           - '&7matadora irá evoluir mais rápido.'
@@ -255,7 +255,7 @@ Inventory:
           - '&7Clique para evoluir!'
       max-level:
         type: NETHER_STAR
-        name: "&6EXP"
+        name: "&aEXP"
         lore:
           - '&7Aumentando o EXP ganho, sua'
           - '&7matadora irá evoluir mais rápido.'

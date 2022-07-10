@@ -2,6 +2,9 @@ package com.zpedroo.farmsword.utils.config;
 
 import com.zpedroo.farmsword.utils.FileUtils;
 import com.zpedroo.farmsword.utils.color.Colorize;
+import com.zpedroo.multieconomy.utils.formatter.NumberFormatter;
+
+import java.math.BigInteger;
 
 public class Quality {
 
@@ -11,7 +14,7 @@ public class Quality {
 
     public static final int ITEM_LEVEL_PER_QUALITY = FileUtils.get().getInt(FileUtils.Files.CONFIG, "Quality.item-level-per-quality");
 
-    public static final int COST_PER_QUALITY = FileUtils.get().getInt(FileUtils.Files.CONFIG, "Quality.cost-per-quality");
+    public static final BigInteger COST_PER_QUALITY = NumberFormatter.getInstance().filter(FileUtils.get().getString(FileUtils.Files.CONFIG, "Quality.cost-per-quality"));
 
     public static final double BONUS_PER_QUALITY = FileUtils.get().getDouble(FileUtils.Files.CONFIG, "Quality.bonus-per-quality");
 

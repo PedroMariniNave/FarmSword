@@ -18,7 +18,10 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.math.BigInteger;
 import java.util.List;
+
+import static com.zpedroo.farmsword.utils.config.Settings.QUALITY_CURRENCY;
 
 public class Menus extends InventoryUtils {
 
@@ -70,8 +73,8 @@ public class Menus extends InventoryUtils {
                         break;
                 }
 
-                player.setItemInHand(newItem);
                 openUpgradeMenu(player, newItem);
+                player.setItemInHand(newItem);
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1f, 4f);
             }, ActionType.ALL_CLICKS);
         }
@@ -123,12 +126,21 @@ public class Menus extends InventoryUtils {
 
     private String[] getUpgradeReplacers(@NotNull ItemStack item, @Nullable Enchant enchant) {
         List<String> replacers = Lists.newArrayList(FarmSwordUtils.getReplacers(item));
-        replacers.add(NumberFormatter.formatThousand(
-                enchant == null ? FarmSwordUtils.getQualityUpgradeCost(item) : FarmSwordUtils.getEnchantUpgradeCost(item, enchant))
-        );
-        replacers.add(NumberFormatter.formatThousand(
-                enchant == null ? FarmSwordUtils.getQualityUpgradeLevelRequired(item) : FarmSwordUtils.getEnchantUpgradeLevelRequired(item, enchant))
-        );
+        BigInteger upgradeCost;
+        int upgradeLevelRequired;
+        if (enchant == null) {
+            upgradeCost = FarmSwordUtils.getQualityUpgradeCost(item);
+            upgradeLevelRequired = FarmSwordUtils.getQualityUpgradeLevelRequired(item);
+
+            replacers.add(QUALITY_CURRENCY == null ? NumberFormatter.formatThousand(upgradeCost.doubleValue()) : QUALITY_CURRENCY.getAmountDisplay(upgradeCost));
+            replacers.add(NumberFormatter.formatThousand(upgradeLevelRequired));
+        } else {
+            upgradeCost = BigInteger.valueOf(FarmSwordUtils.getEnchantUpgradeCost(item, enchant));
+            upgradeLevelRequired = FarmSwordUtils.getEnchantUpgradeLevelRequired(item, enchant);
+
+            replacers.add(NumberFormatter.formatThousand(upgradeCost.doubleValue()));
+            replacers.add(NumberFormatter.formatThousand(upgradeLevelRequired));
+        }
 
         return replacers.toArray(new String[0]);
     }

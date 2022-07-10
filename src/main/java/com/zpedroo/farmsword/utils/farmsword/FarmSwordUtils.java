@@ -16,6 +16,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -118,7 +119,14 @@ public class FarmSwordUtils {
 
     public static ItemStack setEnchantmentLevel(@NotNull ItemStack item, Enchant enchant, int level) {
         NBTItem nbt = new NBTItem(item);
-        nbt.setInteger(enchant.getName(), level);
+        String enchantName = enchant.getName();
+        nbt.setInteger(enchantName, level);
+        Enchantment enchantment = Enchantment.getByName(enchantName.toUpperCase());
+        if (enchantment != null) {
+            ItemMeta meta = nbt.getItem().getItemMeta();
+            meta.addEnchant(enchantment, level, true);
+            nbt.getItem().setItemMeta(meta);
+        }
 
         return Items.getFarmSwordItem(nbt.getItem());
     }
@@ -161,12 +169,12 @@ public class FarmSwordUtils {
         return Items.getFarmSwordItem(nbt.getItem());
     }
 
-    public static int getQualityUpgradeCost(@NotNull ItemStack item) {
+    public static BigInteger getQualityUpgradeCost(@NotNull ItemStack item) {
         int quality = getItemQuality(item);
         int nextLevel = quality + 1;
-        int costPerLevel = Quality.COST_PER_QUALITY;
+        BigInteger costPerLevel = Quality.COST_PER_QUALITY;
 
-        return nextLevel * costPerLevel;
+        return BigInteger.valueOf(nextLevel).multiply(costPerLevel);
     }
 
     public static int getQualityUpgradeLevelRequired(@NotNull ItemStack item) {
@@ -190,15 +198,15 @@ public class FarmSwordUtils {
     }
 
     public static ItemStack upgradeQuality(@Nullable Player player, @NotNull ItemStack item) {
-        int upgradeCost = getQualityUpgradeCost(item);
+        BigInteger upgradeCost = getQualityUpgradeCost(item);
         Currency currency = Settings.QUALITY_CURRENCY;
         item = addQuality(item, 1);
         if (currency != null && player != null) {
-            CurrencyAPI.removeCurrencyAmount(player.getUniqueId(), currency, BigInteger.valueOf(upgradeCost));
+            CurrencyAPI.removeCurrencyAmount(player.getUniqueId(), currency, upgradeCost);
             return item;
         }
 
-        item = removeItemPoints(item, upgradeCost);
+        item = removeItemPoints(item, upgradeCost.intValue());
         return item;
     }
 
@@ -240,15 +248,15 @@ public class FarmSwordUtils {
         if (!isUnlockedQuality(item) || isMaxQualityLevel(item)) return false;
 
         Currency currency = Settings.QUALITY_CURRENCY;
-        int upgradeCost = getQualityUpgradeCost(item);
+        BigInteger upgradeCost = getQualityUpgradeCost(item);
         if (currency != null && player != null) {
             BigInteger currencyAmount = CurrencyAPI.getCurrencyAmount(player.getUniqueId(), currency);
 
-            return currencyAmount.compareTo(BigInteger.valueOf(upgradeCost)) >= 0;
+            return currencyAmount.compareTo(upgradeCost) >= 0;
         }
 
         int itemPointsAmount = getItemPoints(item);
-        return itemPointsAmount >= upgradeCost;
+        return itemPointsAmount >= upgradeCost.intValue();
     }
 
     public static boolean isMaxEnchantLevel(ItemStack item, Enchant enchant) {
