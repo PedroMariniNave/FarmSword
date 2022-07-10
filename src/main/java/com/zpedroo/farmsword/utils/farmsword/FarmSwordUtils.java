@@ -94,7 +94,7 @@ public class FarmSwordUtils {
         if (enchant == null || property == null) return 0;
 
         double propertyValue = getPropertyValue(enchant, property);
-        double qualityBonus = getQualityBonus(quality);
+        double qualityBonus = getFinalQualityBonus(quality);
 
         return level * propertyValue * qualityBonus;
     }
@@ -182,6 +182,10 @@ public class FarmSwordUtils {
     }
 
     public static double getQualityBonus(int quality) {
+        return quality * Quality.BONUS_PER_QUALITY;
+    }
+
+    public static double getFinalQualityBonus(int quality) {
         return 1 + (quality * Quality.BONUS_PER_QUALITY);
     }
 
