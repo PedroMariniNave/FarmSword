@@ -5,16 +5,21 @@ import com.zpedroo.farmsword.managers.DataManager;
 import com.zpedroo.farmsword.objects.Enchant;
 import com.zpedroo.farmsword.utils.config.Items;
 import com.zpedroo.farmsword.utils.config.Quality;
+import com.zpedroo.farmsword.utils.config.Settings;
 import com.zpedroo.farmsword.utils.formatter.NumberFormatter;
 import com.zpedroo.farmsword.utils.formula.ExperienceManager;
 import com.zpedroo.farmsword.utils.progress.ProgressConverter;
+import com.zpedroo.multieconomy.api.CurrencyAPI;
+import com.zpedroo.multieconomy.objects.general.Currency;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -180,11 +185,16 @@ public class FarmSwordUtils {
         return 1 + (quality * Quality.BONUS_PER_QUALITY);
     }
 
-    public static ItemStack upgradeQuality(@NotNull ItemStack item) {
+    public static ItemStack upgradeQuality(@Nullable Player player, @NotNull ItemStack item) {
         int upgradeCost = getQualityUpgradeCost(item);
-        item = removeItemPoints(item, upgradeCost);
+        Currency currency = Settings.QUALITY_CURRENCY;
         item = addQuality(item, 1);
+        if (currency != null && player != null) {
+            CurrencyAPI.removeCurrencyAmount(player.getUniqueId(), currency, BigInteger.valueOf(upgradeCost));
+            return item;
+        }
 
+        item = removeItemPoints(item, upgradeCost);
         return item;
     }
 
@@ -212,18 +222,28 @@ public class FarmSwordUtils {
     }
 
     public static boolean isUnlockedQuality(ItemStack item) {
-        int quality = getItemQuality(item);
+        int itemLevel = getItemLevel(item);
         int requiredLevel = getQualityUpgradeLevelRequired(item);
 
-        return quality >= requiredLevel;
+        return itemLevel >= requiredLevel;
     }
 
-    public static boolean canUpgradeQuality(ItemStack item) {
+    public static boolean canUpgradeQuality(@NotNull ItemStack item) {
+        return canUpgradeQuality(null, item);
+    }
+
+    public static boolean canUpgradeQuality(@Nullable Player player, @NotNull ItemStack item) {
         if (!isUnlockedQuality(item) || isMaxQualityLevel(item)) return false;
 
-        int itemPointsAmount = getItemPoints(item);
+        Currency currency = Settings.QUALITY_CURRENCY;
         int upgradeCost = getQualityUpgradeCost(item);
+        if (currency != null && player != null) {
+            BigInteger currencyAmount = CurrencyAPI.getCurrencyAmount(player.getUniqueId(), currency);
 
+            return currencyAmount.compareTo(BigInteger.valueOf(upgradeCost)) >= 0;
+        }
+
+        int itemPointsAmount = getItemPoints(item);
         return itemPointsAmount >= upgradeCost;
     }
 

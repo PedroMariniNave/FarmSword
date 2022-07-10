@@ -4,6 +4,7 @@ Settings:
   admin-permission: 'farmsword.admin'
   farm-sword-pickup-cooldown: 5
   prevent-player-hit: true
+  quality-currency: 'cash' # MultiEconomy compatibility. Empty or null = plugin points
 
 Messages:
   player-hit: '&cVocê não pode atacar jogadores com uma Espada Farm!'

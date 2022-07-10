@@ -43,7 +43,7 @@ public class Menus extends InventoryUtils {
             String[] split = action.split(":");
             String upgradeElementName = split.length > 1 ? split[1] : "NULL";
             Enchant enchant = DataManager.getInstance().getEnchantByName(upgradeElementName);
-            ItemStack item = buildUpgradeItem(itemToUpgrade, fileConfiguration, items, action, enchant);
+            ItemStack item = buildUpgradeItem(player, itemToUpgrade, fileConfiguration, items, action, enchant);
             int slot = FileUtils.get().getInt(file, "Inventory.items." + items + ".slot");
 
             inventory.addItem(item, slot, () -> {
@@ -52,12 +52,12 @@ public class Menus extends InventoryUtils {
                 ItemStack newItem = null;
                 switch (upgradeElementName.toUpperCase()) {
                     case "QUALITY":
-                        if (!FarmSwordUtils.canUpgradeQuality(itemToUpgrade)) {
+                        if (!FarmSwordUtils.canUpgradeQuality(player, itemToUpgrade)) {
                             player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1f, 1f);
                             return;
                         }
 
-                        newItem = FarmSwordUtils.upgradeQuality(itemToUpgrade);
+                        newItem = FarmSwordUtils.upgradeQuality(player, itemToUpgrade);
                         break;
                     default:
                         if (enchant == null) return;
@@ -85,9 +85,9 @@ public class Menus extends InventoryUtils {
     }
 
     @NotNull
-    private ItemStack buildUpgradeItem(ItemStack itemToUpgrade, FileConfiguration fileConfiguration, String items, String action, Enchant enchant) {
+    private ItemStack buildUpgradeItem(Player player, ItemStack itemToUpgrade, FileConfiguration fileConfiguration, String items, String action, Enchant enchant) {
         ItemStack item = null;
-        String toGet = getElementToGet(itemToUpgrade, action, enchant);
+        String toGet = getElementToGet(player, itemToUpgrade, action, enchant);
 
         if (fileConfiguration.contains("Inventory.items." + items + "." + toGet)) {
             String[] placeholders = getUpgradePlaceholders();
@@ -102,12 +102,12 @@ public class Menus extends InventoryUtils {
     }
 
     @Nullable
-    private String getElementToGet(ItemStack itemToUpgrade, String action, Enchant enchant) {
+    private String getElementToGet(Player player, ItemStack itemToUpgrade, String action, Enchant enchant) {
         String toGet = null;
         if (enchant != null) {
             toGet = getItemEnchantStatus(itemToUpgrade, enchant);
         } else if (StringUtils.containsIgnoreCase(action, "QUALITY")) {
-            toGet = getItemQualityStatus(itemToUpgrade);
+            toGet = getItemQualityStatus(player, itemToUpgrade);
         }
 
         return toGet;
@@ -146,12 +146,12 @@ public class Menus extends InventoryUtils {
         return "can-upgrade";
     }
 
-    private String getItemQualityStatus(@NotNull ItemStack item) {
+    private String getItemQualityStatus(@Nullable Player player, @NotNull ItemStack item) {
         if (FarmSwordUtils.isMaxQualityLevel(item)) {
             return "max-level";
         } else if (!FarmSwordUtils.isUnlockedQuality(item)) {
             return "locked";
-        } else if (!FarmSwordUtils.canUpgradeQuality(item)) {
+        } else if (!FarmSwordUtils.canUpgradeQuality(player, item)) {
             return "can-not-upgrade";
         }
 
