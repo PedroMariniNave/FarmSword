@@ -22,9 +22,9 @@ import org.bukkit.inventory.ItemStack;
 
 public class FarmSwordListeners implements Listener {
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onMobDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player)) return;
+        if (!(event.getDamager() instanceof Player) || event.isCancelled()) return;
 
         Player player = (Player) event.getDamager();
         ItemStack item = player.getItemInHand();
