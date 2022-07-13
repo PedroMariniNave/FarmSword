@@ -16,7 +16,6 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -105,7 +104,10 @@ public class FarmSwordUtils {
 
         String enchantName = enchant.getName();
         Enchantment enchantment = Enchantment.getByName(enchantName.toUpperCase());
-        if (enchantment != null) return item.getEnchantmentLevel(enchantment);
+        if (enchantment != null) {
+            int level = item.getEnchantmentLevel(enchantment);
+            return reverseQualityBonus(item, level);
+        }
 
         NBTItem nbt = new NBTItem(item);
         if (!nbt.hasKey(enchant.getName())) return enchant.getInitialLevel();
@@ -122,13 +124,13 @@ public class FarmSwordUtils {
         String enchantName = enchant.getName();
         nbt.setInteger(enchantName, level);
         Enchantment enchantment = Enchantment.getByName(enchantName.toUpperCase());
+        final ItemStack nbtItem = nbt.getItem();
         if (enchantment != null) {
-            ItemMeta meta = nbt.getItem().getItemMeta();
-            meta.addEnchant(enchantment, level, true);
-            nbt.getItem().setItemMeta(meta);
+            int finalLevel = applyQualityBonus(item, level);
+            nbtItem.addUnsafeEnchantment(enchantment, finalLevel);
         }
 
-        return Items.getFarmSwordItem(nbt.getItem());
+        return Items.getFarmSwordItem(nbtItem);
     }
 
     public static int getEnchantUpgradeCost(@NotNull ItemStack item, @Nullable Enchant enchant) {
@@ -193,6 +195,10 @@ public class FarmSwordUtils {
         return quality * Quality.BONUS_PER_QUALITY;
     }
 
+    public static double getFinalQualityBonus(ItemStack item) {
+        return getFinalQualityBonus(getItemQuality(item));
+    }
+
     public static double getFinalQualityBonus(int quality) {
         return 1 + (quality * Quality.BONUS_PER_QUALITY);
     }
@@ -238,6 +244,17 @@ public class FarmSwordUtils {
         int requiredLevel = getQualityUpgradeLevelRequired(item);
 
         return itemLevel >= requiredLevel;
+    }
+
+    public static int applyQualityBonus(@NotNull ItemStack item, int level) {
+        return (int) (level * getFinalQualityBonus(item));
+    }
+
+    public static int reverseQualityBonus(@NotNull ItemStack item, int level) {
+        double qualityBonus = getFinalQualityBonus(item);
+        double divisor = level > qualityBonus ? qualityBonus : 1;
+
+        return (int) (level / divisor);
     }
 
     public static boolean canUpgradeQuality(@NotNull ItemStack item) {

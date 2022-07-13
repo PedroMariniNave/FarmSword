@@ -58,9 +58,8 @@ public class Items {
             nbt.setInteger(enchantName, level);
             Enchantment enchantment = Enchantment.getByName(enchantName.toUpperCase());
             if (enchantment != null) {
-                ItemMeta meta = nbt.getItem().getItemMeta();
-                meta.addEnchant(enchantment, level, true);
-                nbt.getItem().setItemMeta(meta);
+                int finalLevel = FarmSwordUtils.applyQualityBonus(baseItem, level);
+                nbt.getItem().addUnsafeEnchantment(enchantment, finalLevel);
             }
         }
 
