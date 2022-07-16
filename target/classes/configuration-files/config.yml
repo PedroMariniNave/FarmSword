@@ -61,7 +61,7 @@ Farm-Sword-Item:
     - '&7Pilhagem: &f{loot_bonus_mobs}'
     - '&7EXP: &f{exp}'
     - ''
-    - ' &8► &fNível: &7{level} {progress}'
+    - ' &8► &fNível: &7{level} {progress} &8({percentage}%)'
     - ' &8► &fCristais: &7{points} &f&l✸'
     - ' &8► &fQualidade: {quality}'
     - ''
