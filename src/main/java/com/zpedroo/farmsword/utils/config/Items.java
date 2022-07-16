@@ -24,7 +24,7 @@ public class Items {
     @NotNull
     public static ItemStack getPointsItem(int amount) {
         NBTItem nbt = new NBTItem(POINTS_ITEM.clone());
-        nbt.setInteger(FarmSwordUtils.POINTS_NBT, amount);
+        nbt.setInteger(FarmSwordUtils.POINTS_ITEM_NBT, amount);
 
         String[] placeholders = new String[]{
                 "{amount}"
@@ -64,7 +64,7 @@ public class Items {
         }
 
         nbt.setDouble(FarmSwordUtils.EXPERIENCE_NBT, FarmSwordUtils.getItemExperience(baseItem));
-        nbt.setInteger(FarmSwordUtils.POINTS_NBT, FarmSwordUtils.getItemPoints(baseItem));
+        nbt.setInteger(FarmSwordUtils.FARM_SWORD_POINTS_NBT, FarmSwordUtils.getItemPoints(baseItem));
         nbt.setInteger(FarmSwordUtils.QUALITY_NBT, FarmSwordUtils.getItemQuality(baseItem));
 
         ItemStack item = nbt.getItem();

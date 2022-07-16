@@ -17,6 +17,8 @@ public class PlayerGeneralListeners implements Listener {
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK && event.getAction() != Action.RIGHT_CLICK_AIR) return;
         if (!FarmSwordUtils.isFarmSword(event.getItem())) return;
 
+        event.setCancelled(true);
+
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
         Menus.getInstance().openUpgradeMenu(player, item);

@@ -26,7 +26,8 @@ import java.util.List;
 
 public class FarmSwordUtils {
 
-    public static final String POINTS_NBT = "FarmSwordPoints";
+    public static final String POINTS_ITEM_NBT = "FarmPointsItem";
+    public static final String FARM_SWORD_POINTS_NBT = "FarmSwordPoints";
     public static final String EXPERIENCE_NBT = "FarmSwordExperience";
     public static final String QUALITY_NBT = "FarmSwordQuality";
     public static final String IDENTIFIER_NBT = "FarmSword";
@@ -41,7 +42,7 @@ public class FarmSwordUtils {
 
     public static ItemStack setItemPoints(@NotNull ItemStack item, int amount) {
         NBTItem nbt = new NBTItem(item);
-        nbt.setInteger(POINTS_NBT, amount);
+        nbt.setInteger(FARM_SWORD_POINTS_NBT, amount);
 
         return Items.getFarmSwordItem(nbt.getItem());
     }
@@ -77,9 +78,9 @@ public class FarmSwordUtils {
 
     public static int getItemPoints(@NotNull ItemStack item) {
         NBTItem nbt = new NBTItem(item);
-        if (!nbt.hasKey(POINTS_NBT)) return 0;
+        if (!nbt.hasKey(FARM_SWORD_POINTS_NBT)) return 0;
 
-        return nbt.getInteger(POINTS_NBT);
+        return nbt.getInteger(FARM_SWORD_POINTS_NBT);
     }
 
     public static double getPropertyValue(Enchant enchant, EnchantProperty property) {
