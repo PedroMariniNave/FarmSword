@@ -62,7 +62,7 @@ Inventory:
           - ''
           - '&cA qualidade já está no nível máximo!'
     2:
-      slot: 29
+      slot: 30
       action: 'UPGRADE:DAMAGE_ALL'
       locked:
         type: BARRIER
@@ -73,7 +73,7 @@ Inventory:
           - '&7mais facilidade.'
           - ''
           - ' &8▶ &7Afiação: &f{damage_all} &8➟ &f{damage_all_next}'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ' &8▶ &7Custo: &f{cost} &a&l✦'
           - ''
           - '&cNecessário nível {required_level} ou superior!'
       can-not-upgrade:
@@ -85,9 +85,9 @@ Inventory:
           - '&7mais facilidade.'
           - ''
           - ' &8▶ &7Afiação: &f{damage_all} &8➟ &f{damage_all_next}'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ' &8▶ &7Custo: &f{cost} &a&l✦'
           - ''
-          - '&cEsse item não possui cristais suficientes!'
+          - '&cEsse item não possui mobs suficientes!'
       can-upgrade:
         type: ENCHANTED_BOOK
         name: "&aAfiação"
@@ -97,7 +97,7 @@ Inventory:
           - '&7mais facilidade.'
           - ''
           - ' &8▶ &7Afiação: &f{damage_all} &8➟ &f{damage_all_next}'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ' &8▶ &7Custo: &f{cost} &a&l✦'
           - ''
           - '&7Clique para evoluir!'
       max-level:
@@ -112,57 +112,7 @@ Inventory:
           - ''
           - '&cEsse encantamento já está no nível máximo!'
     3:
-      slot: 30
-      action: 'UPGRADE:DURABILITY'
-      locked:
-        type: BARRIER
-        name: "&cInquebrável"
-        lore:
-          - '&7A resistência da sua espada é'
-          - '&7importante para que ela não'
-          - '&7quebre inesperadamente.'
-          - ''
-          - ' &8▶ &7Inquebrável: &f{durability} &8➟ &f{durability_next}'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
-          - ''
-          - '&cNecessário nível {required_level} ou superior!'
-      can-not-upgrade:
-        type: REDSTONE
-        name: "&cInquebrável"
-        lore:
-          - '&7A resistência da sua espada é'
-          - '&7importante para que ela não'
-          - '&7quebre inesperadamente.'
-          - ''
-          - ' &8▶ &7Inquebrável: &f{durability} &8➟ &f{durability_next}'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
-          - ''
-          - '&cEsse item não possui cristais suficientes!'
-      can-upgrade:
-        type: ENCHANTED_BOOK
-        name: "&aInquebrável"
-        lore:
-          - '&7A resistência da sua espada é'
-          - '&7importante para que ela não'
-          - '&7quebre inesperadamente.'
-          - ''
-          - ' &8▶ &7Inquebrável: &f{durability} &8➟ &f{durability_next}'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
-          - ''
-          - '&7Clique para evoluir!'
-      max-level:
-        type: NETHER_STAR
-        name: "&aInquebrável"
-        lore:
-          - '&7A resistência da sua espada é'
-          - '&7importante para que ela não'
-          - '&7quebre inesperadamente.'
-          - ''
-          - ' &8▶ &7Inquebrável: &f{durability}'
-          - ''
-          - '&cEsse encantamento já está no nível máximo!'
-    4:
-      slot: 32
+      slot: 31
       action: 'UPGRADE:LOOT_BONUS_MOBS'
       locked:
         type: BARRIER
@@ -174,7 +124,7 @@ Inventory:
           - '&7o número de drops obtidos.'
           - ''
           - ' &8▶ &7Pilhagem: &f{loot_bonus_mobs} &8➟ &f{loot_bonus_mobs_next}'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ' &8▶ &7Custo: &f{cost} &a&l✦'
           - ''
           - '&cNecessário nível {required_level} ou superior!'
       can-not-upgrade:
@@ -187,9 +137,9 @@ Inventory:
           - '&7o número de drops obtidos.'
           - ''
           - ' &8▶ &7Pilhagem: &f{loot_bonus_mobs} &8➟ &f{loot_bonus_mobs_next}'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ' &8▶ &7Custo: &f{cost} &a&l✦'
           - ''
-          - '&cEsse item não possui cristais suficientes!'
+          - '&cEsse item não possui mobs suficientes!'
       can-upgrade:
         type: ENCHANTED_BOOK
         name: "&aPilhagem"
@@ -200,22 +150,23 @@ Inventory:
           - '&7o número de drops obtidos.'
           - ''
           - ' &8▶ &7Pilhagem: &f{loot_bonus_mobs} &8➟ &f{loot_bonus_mobs_next}'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ' &8▶ &7Custo: &f{cost} &a&l✦'
           - ''
           - '&7Clique para evoluir!'
       max-level:
         type: NETHER_STAR
         name: "&aPilhagem"
         lore:
-          - '&7A resistência da sua espada é'
-          - '&7importante para que ela não'
-          - '&7quebre inesperadamente.'
+          - '&7A pilhagem aumenta a quantia de'
+          - '&7drops obtidos ao matar um mob.'
+          - '&7Quanto maior a pilhagem, maior'
+          - '&7o número de drops obtidos.'
           - ''
           - ' &8▶ &7Pilhagem: &f{loot_bonus_mobs}'
           - ''
           - '&cEsse encantamento já está no nível máximo!'
-    5:
-      slot: 33
+    4:
+      slot: 32
       action: 'UPGRADE:EXP'
       locked:
         type: BARRIER
@@ -226,7 +177,7 @@ Inventory:
           - ''
           - ' &8▶ &7Nível: &f{exp} &8➟ &f{exp_next}'
           - ' &8▶ &7Bônus: &f{exp_multiplier}x &8➟ &f{exp_next_multiplier}x'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ' &8▶ &7Custo: &f{cost} &a&l✦'
           - ''
           - '&cNecessário nível {required_level} ou superior!'
       can-not-upgrade:
@@ -234,23 +185,23 @@ Inventory:
         name: "&cEXP"
         lore:
           - '&7Aumentando o EXP ganho, sua'
-          - '&7matadora irá evoluir mais rápido.'
+          - '&7espada irá evoluir mais rápido.'
           - ''
           - ' &8▶ &7Nível: &f{exp} &8➟ &f{exp_next}'
           - ' &8▶ &7Bônus: &f{exp_multiplier}x &8➟ &f{exp_next_multiplier}x'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ' &8▶ &7Custo: &f{cost} &a&l✦'
           - ''
-          - '&cEsse item não possui cristais suficientes!'
+          - '&cEsse item não possui mobs suficientes!'
       can-upgrade:
         type: ENCHANTED_BOOK
         name: "&aEXP"
         lore:
           - '&7Aumentando o EXP ganho, sua'
-          - '&7matadora irá evoluir mais rápido.'
+          - '&7espada irá evoluir mais rápido.'
           - ''
           - ' &8▶ &7Nível: &f{exp} &8➟ &f{exp_next}'
           - ' &8▶ &7Bônus: &f{exp_multiplier}x &8➟ &f{exp_next_multiplier}x'
-          - ' &8▶ &7Custo: &f{cost} &f&l✸'
+          - ' &8▶ &7Custo: &f{cost} &a&l✦'
           - ''
           - '&7Clique para evoluir!'
       max-level:
@@ -258,7 +209,7 @@ Inventory:
         name: "&aEXP"
         lore:
           - '&7Aumentando o EXP ganho, sua'
-          - '&7matadora irá evoluir mais rápido.'
+          - '&7espada irá evoluir mais rápido.'
           - ''
           - ' &8▶ &7Nível: &f{exp}'
           - ' &8▶ &7Bônus: &f{exp_multiplier}x'

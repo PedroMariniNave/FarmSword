@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,15 +23,15 @@ public class Items {
     private static final ItemStack FARM_SWORD_ITEM = ItemBuilder.build(FileUtils.get().getFile(FileUtils.Files.CONFIG).get(), "Farm-Sword-Item").build();
 
     @NotNull
-    public static ItemStack getPointsItem(int amount) {
+    public static ItemStack getPointsItem(BigInteger amount) {
         NBTItem nbt = new NBTItem(POINTS_ITEM.clone());
-        nbt.setInteger(FarmSwordUtils.POINTS_ITEM_NBT, amount);
+        nbt.setString(FarmSwordUtils.POINTS_ITEM_NBT, amount.toString());
 
         String[] placeholders = new String[]{
                 "{amount}"
         };
         String[] replacers = new String[]{
-                NumberFormatter.getInstance().formatThousand(amount)
+                NumberFormatter.getInstance().format(amount)
         };
 
         return replaceItemPlaceholders(nbt.getItem(), placeholders, replacers);
