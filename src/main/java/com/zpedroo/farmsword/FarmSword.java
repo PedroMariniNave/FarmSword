@@ -31,10 +31,10 @@ public class FarmSword extends JavaPlugin {
     public void onEnable() {
         instance = this;
         new FileUtils(this);
+        new NumberFormatter(getConfig());
         new DataManager();
         new Cooldown();
         new Menus();
-        new NumberFormatter(getConfig());
 
         registerListeners();
         registerCommand(COMMAND, ALIASES, new FarmSwordCmd());

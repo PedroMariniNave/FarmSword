@@ -22,12 +22,6 @@ Enchants:
       max: 10
       requirement-per-upgrade: 5
     cost-per-level: 100
-  durability:
-    level:
-      initial: 0
-      max: 10
-      requirement-per-upgrade: 2
-    cost-per-level: 100
   loot_bonus_mobs:
     level:
       initial: 0
