@@ -3,11 +3,11 @@ package com.zpedroo.farmsword.objects;
 import com.zpedroo.farmsword.enums.EnchantProperty;
 import com.zpedroo.farmsword.utils.farmsword.FarmSwordUtils;
 import com.zpedroo.farmsword.utils.formatter.NumberFormatter;
-import com.zpedroo.farmsword.utils.roman.NumberConverter;
 import lombok.Data;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +19,7 @@ public class Enchant {
     private final int initialLevel;
     private final int maxLevel;
     private final int requiredLevel;
-    private final int costPerLevel;
+    private final BigInteger costPerLevel;
     private final Map<EnchantProperty, Number> enchantProperties;
 
     public Number getPropertyEffect(EnchantProperty property) {
@@ -46,12 +46,12 @@ public class Enchant {
         int level = FarmSwordUtils.getEnchantmentLevel(item, this);
         int nextLevel = level + 1;
 
-        replacers.add(NumberConverter.convertToRoman(level));
-        replacers.add(NumberConverter.convertToRoman(nextLevel));
+        replacers.add(NumberFormatter.getInstance().convertToRoman(level));
+        replacers.add(NumberFormatter.getInstance().convertToRoman(nextLevel));
 
         for (EnchantProperty property : EnchantProperty.values()) {
-            replacers.add(NumberFormatter.formatDecimal(FarmSwordUtils.getEnchantEffectByLevel(this, property, level, quality)));
-            replacers.add(NumberFormatter.formatDecimal(FarmSwordUtils.getEnchantEffectByLevel(this, property, nextLevel, quality)));
+            replacers.add(NumberFormatter.getInstance().formatDecimal(FarmSwordUtils.getEnchantEffectByLevel(this, property, level, quality)));
+            replacers.add(NumberFormatter.getInstance().formatDecimal(FarmSwordUtils.getEnchantEffectByLevel(this, property, nextLevel, quality)));
         }
 
         return replacers;

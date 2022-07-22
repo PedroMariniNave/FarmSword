@@ -14,6 +14,8 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.math.BigInteger;
+
 public class PointsListeners implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -39,8 +41,8 @@ public class PointsListeners implements Listener {
         final int itemAmount = cursor.getAmount();
         event.setCursor(new ItemStack(Material.AIR));
 
-        int pointsAmount = cursorNBT.getInteger(FarmSwordUtils.POINTS_ITEM_NBT);
-        int finalPointsAmount = pointsAmount * itemAmount;
+        BigInteger pointsAmount = new BigInteger(cursorNBT.getString(FarmSwordUtils.POINTS_ITEM_NBT));
+        BigInteger finalPointsAmount = pointsAmount.multiply(BigInteger.valueOf(itemAmount));
         ItemStack newItem = FarmSwordUtils.addItemPoints(item, finalPointsAmount);
 
         player.getInventory().setItem(event.getSlot(), newItem);

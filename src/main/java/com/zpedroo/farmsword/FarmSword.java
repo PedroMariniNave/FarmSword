@@ -34,6 +34,7 @@ public class FarmSword extends JavaPlugin {
         new DataManager();
         new Cooldown();
         new Menus();
+        new NumberFormatter(getConfig());
 
         registerListeners();
         registerCommand(COMMAND, ALIASES, new FarmSwordCmd());

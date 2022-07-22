@@ -10,7 +10,6 @@ import com.zpedroo.farmsword.utils.config.Titles;
 import com.zpedroo.farmsword.utils.farmsword.FarmSwordUtils;
 import com.zpedroo.farmsword.utils.formatter.NumberFormatter;
 import org.apache.commons.lang.StringUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -40,6 +39,7 @@ public class FarmSwordListeners implements Listener {
         double expAmount = farmMob.getExpAmount();
         double expToGive = expAmount * bonus;
         ItemStack newItem = FarmSwordUtils.addItemExperience(item, expToGive);
+        newItem = FarmSwordUtils.addItemPoints(newItem, farmMob.getPointsAmount());
         int newLevel = FarmSwordUtils.getItemLevel(newItem);
 
         if (isNewLevel(oldLevel, newLevel)) {
@@ -63,6 +63,7 @@ public class FarmSwordListeners implements Listener {
 
         double expAmount = farmMob.getExpAmount();
         ItemStack newItem = FarmSwordUtils.addItemExperience(item, expAmount);
+        newItem = FarmSwordUtils.addItemPoints(newItem, farmMob.getPointsAmount());
         player.setItemInHand(newItem);
     }
 
@@ -83,7 +84,7 @@ public class FarmSwordListeners implements Listener {
     private void sendUpgradeTitle(Player player, int oldLevel, int newLevel) {
         String[] placeholders = new String[]{ "{old_level}", "{new_level}" };
         String[] replacers = new String[]{
-                NumberFormatter.formatThousand(oldLevel), NumberFormatter.formatThousand(newLevel)
+                NumberFormatter.getInstance().formatThousand(oldLevel), NumberFormatter.getInstance().formatThousand(newLevel)
         };
         player.sendTitle(
                 StringUtils.replaceEach(Titles.FARM_SWORD_UPGRADE[0], placeholders, replacers),

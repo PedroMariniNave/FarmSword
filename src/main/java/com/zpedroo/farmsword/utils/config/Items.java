@@ -30,7 +30,7 @@ public class Items {
                 "{amount}"
         };
         String[] replacers = new String[]{
-                NumberFormatter.formatThousand(amount)
+                NumberFormatter.getInstance().formatThousand(amount)
         };
 
         return replaceItemPlaceholders(nbt.getItem(), placeholders, replacers);
@@ -64,7 +64,7 @@ public class Items {
         }
 
         nbt.setDouble(FarmSwordUtils.EXPERIENCE_NBT, FarmSwordUtils.getItemExperience(baseItem));
-        nbt.setInteger(FarmSwordUtils.FARM_SWORD_POINTS_NBT, FarmSwordUtils.getItemPoints(baseItem));
+        nbt.setString(FarmSwordUtils.FARM_SWORD_POINTS_NBT, FarmSwordUtils.getItemPoints(baseItem).toString());
         nbt.setInteger(FarmSwordUtils.QUALITY_NBT, FarmSwordUtils.getItemQuality(baseItem));
 
         ItemStack item = nbt.getItem();

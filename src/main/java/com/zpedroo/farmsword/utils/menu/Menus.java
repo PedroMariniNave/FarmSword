@@ -132,14 +132,14 @@ public class Menus extends InventoryUtils {
             upgradeCost = FarmSwordUtils.getQualityUpgradeCost(item);
             upgradeLevelRequired = FarmSwordUtils.getQualityUpgradeLevelRequired(item);
 
-            replacers.add(QUALITY_CURRENCY == null ? NumberFormatter.formatThousand(upgradeCost.doubleValue()) : QUALITY_CURRENCY.getAmountDisplay(upgradeCost));
-            replacers.add(NumberFormatter.formatThousand(upgradeLevelRequired));
+            replacers.add(QUALITY_CURRENCY == null ? NumberFormatter.getInstance().format(upgradeCost) : QUALITY_CURRENCY.getAmountDisplay(upgradeCost));
+            replacers.add(NumberFormatter.getInstance().formatThousand(upgradeLevelRequired));
         } else {
-            upgradeCost = BigInteger.valueOf(FarmSwordUtils.getEnchantUpgradeCost(item, enchant));
+            upgradeCost = FarmSwordUtils.getEnchantUpgradeCost(item, enchant);
             upgradeLevelRequired = FarmSwordUtils.getEnchantUpgradeLevelRequired(item, enchant);
 
-            replacers.add(NumberFormatter.formatThousand(upgradeCost.doubleValue()));
-            replacers.add(NumberFormatter.formatThousand(upgradeLevelRequired));
+            replacers.add(NumberFormatter.getInstance().format(upgradeCost));
+            replacers.add(NumberFormatter.getInstance().formatThousand(upgradeLevelRequired));
         }
 
         return replacers.toArray(new String[0]);

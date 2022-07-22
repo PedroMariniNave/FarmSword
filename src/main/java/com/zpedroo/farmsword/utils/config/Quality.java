@@ -14,7 +14,7 @@ public class Quality {
 
     public static final int ITEM_LEVEL_PER_QUALITY = FileUtils.get().getInt(FileUtils.Files.CONFIG, "Quality.item-level-per-quality");
 
-    public static final BigInteger COST_PER_QUALITY = NumberFormatter.getInstance().filter(FileUtils.get().getString(FileUtils.Files.CONFIG, "Quality.cost-per-quality"));
+    public static final BigInteger COST_PER_QUALITY = NumberFormatter.getInstance().getInstance().filter(FileUtils.get().getString(FileUtils.Files.CONFIG, "Quality.cost-per-quality"));
 
     public static final double BONUS_PER_QUALITY = FileUtils.get().getDouble(FileUtils.Files.CONFIG, "Quality.bonus-per-quality");
 

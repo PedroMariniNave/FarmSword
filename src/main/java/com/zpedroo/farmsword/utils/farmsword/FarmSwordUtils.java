@@ -26,23 +26,23 @@ import java.util.List;
 
 public class FarmSwordUtils {
 
-    public static final String POINTS_ITEM_NBT = "FarmPointsItem";
+    public static final String POINTS_ITEM_NBT = "FarmSwordPointsItem";
     public static final String FARM_SWORD_POINTS_NBT = "FarmSwordPoints";
     public static final String EXPERIENCE_NBT = "FarmSwordExperience";
     public static final String QUALITY_NBT = "FarmSwordQuality";
     public static final String IDENTIFIER_NBT = "FarmSword";
 
-    public static ItemStack addItemPoints(@NotNull ItemStack item, int amount) {
-        return setItemPoints(item, getItemPoints(item) + amount);
+    public static ItemStack addItemPoints(@NotNull ItemStack item, BigInteger amount) {
+        return setItemPoints(item, getItemPoints(item).add(amount));
     }
 
-    public static ItemStack removeItemPoints(@NotNull ItemStack item, int amount) {
-        return setItemPoints(item, getItemPoints(item) - amount);
+    public static ItemStack removeItemPoints(@NotNull ItemStack item, BigInteger amount) {
+        return setItemPoints(item, getItemPoints(item).subtract(amount));
     }
 
-    public static ItemStack setItemPoints(@NotNull ItemStack item, int amount) {
+    public static ItemStack setItemPoints(@NotNull ItemStack item, BigInteger amount) {
         NBTItem nbt = new NBTItem(item);
-        nbt.setInteger(FARM_SWORD_POINTS_NBT, amount);
+        nbt.setString(FARM_SWORD_POINTS_NBT, amount.toString());
 
         return Items.getFarmSwordItem(nbt.getItem());
     }
@@ -76,11 +76,11 @@ public class FarmSwordUtils {
         return nbt.getInteger(QUALITY_NBT);
     }
 
-    public static int getItemPoints(@NotNull ItemStack item) {
+    public static BigInteger getItemPoints(@NotNull ItemStack item) {
         NBTItem nbt = new NBTItem(item);
-        if (!nbt.hasKey(FARM_SWORD_POINTS_NBT)) return 0;
+        if (!nbt.hasKey(FARM_SWORD_POINTS_NBT)) return BigInteger.ZERO;
 
-        return nbt.getInteger(FARM_SWORD_POINTS_NBT);
+        return new BigInteger(nbt.getString(FARM_SWORD_POINTS_NBT));
     }
 
     public static double getPropertyValue(Enchant enchant, EnchantProperty property) {
@@ -134,13 +134,13 @@ public class FarmSwordUtils {
         return Items.getFarmSwordItem(nbtItem);
     }
 
-    public static int getEnchantUpgradeCost(@NotNull ItemStack item, @Nullable Enchant enchant) {
-        if (enchant == null) return 0;
+    public static BigInteger getEnchantUpgradeCost(@NotNull ItemStack item, @Nullable Enchant enchant) {
+        if (enchant == null) return BigInteger.ZERO;
 
         int enchantLevel = getEnchantmentLevel(item, enchant) + 1; // level can be zero
-        int costPerLevel = enchant.getCostPerLevel();
+        BigInteger costPerLevel = enchant.getCostPerLevel();
 
-        return enchantLevel * costPerLevel;
+        return BigInteger.valueOf(enchantLevel).multiply(costPerLevel);
     }
 
     public static int getEnchantUpgradeLevelRequired(@NotNull ItemStack item, @Nullable Enchant enchant) {
@@ -154,7 +154,7 @@ public class FarmSwordUtils {
     }
 
     public static ItemStack upgradeEnchantment(@NotNull ItemStack item, @NotNull Enchant enchant) {
-        int upgradeCost = getEnchantUpgradeCost(item, enchant);
+        BigInteger upgradeCost = getEnchantUpgradeCost(item, enchant);
         item = removeItemPoints(item, upgradeCost);
         item = addEnchantmentLevel(item, enchant, 1);
 
@@ -213,7 +213,7 @@ public class FarmSwordUtils {
             return item;
         }
 
-        item = removeItemPoints(item, upgradeCost.intValue());
+        item = removeItemPoints(item, upgradeCost);
         return item;
     }
 
@@ -234,10 +234,10 @@ public class FarmSwordUtils {
     public static boolean canUpgradeEnchant(ItemStack item, Enchant enchant) {
         if (!isUnlockedEnchant(item, enchant) || isMaxEnchantLevel(item, enchant)) return false;
 
-        int itemPointsAmount = getItemPoints(item);
-        int upgradeCost = getEnchantUpgradeCost(item, enchant);
+        BigInteger itemPointsAmount = getItemPoints(item);
+        BigInteger upgradeCost = getEnchantUpgradeCost(item, enchant);
 
-        return itemPointsAmount >= upgradeCost;
+        return itemPointsAmount.compareTo(upgradeCost) >= 0;
     }
 
     public static boolean isUnlockedQuality(ItemStack item) {
@@ -273,8 +273,8 @@ public class FarmSwordUtils {
             return currencyAmount.compareTo(upgradeCost) >= 0;
         }
 
-        int itemPointsAmount = getItemPoints(item);
-        return itemPointsAmount >= upgradeCost.intValue();
+        BigInteger itemPointsAmount = getItemPoints(item);
+        return itemPointsAmount.compareTo(upgradeCost) >= 0;
     }
 
     public static boolean isMaxEnchantLevel(ItemStack item, Enchant enchant) {
@@ -316,14 +316,14 @@ public class FarmSwordUtils {
         int itemQuality = getItemQuality(item);
         int nextItemQuality = itemQuality + 1;
 
-        replacers.add(NumberFormatter.formatThousand(getItemPoints(item)));
-        replacers.add(NumberFormatter.formatThousand(getItemLevel(item)));
-        replacers.add(NumberFormatter.formatDecimal(ProgressConverter.getPercentage(getItemExperience(item))));
+        replacers.add(NumberFormatter.getInstance().format(getItemPoints(item)));
+        replacers.add(NumberFormatter.getInstance().formatThousand(getItemLevel(item)));
+        replacers.add(NumberFormatter.getInstance().formatDecimal(ProgressConverter.getPercentage(getItemExperience(item))));
         replacers.add(ProgressConverter.convertExperience(getItemExperience(item)));
         replacers.add(ProgressConverter.convertQuality(itemQuality));
         replacers.add(ProgressConverter.convertQuality(nextItemQuality));
-        replacers.add(NumberFormatter.formatDecimal(getQualityBonus(itemQuality)));
-        replacers.add(NumberFormatter.formatDecimal(getQualityBonus(nextItemQuality)));
+        replacers.add(NumberFormatter.getInstance().formatDecimal(getQualityBonus(itemQuality)));
+        replacers.add(NumberFormatter.getInstance().formatDecimal(getQualityBonus(nextItemQuality)));
 
         return replacers.toArray(new String[0]);
     }

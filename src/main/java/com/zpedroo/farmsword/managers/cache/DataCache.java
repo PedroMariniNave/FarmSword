@@ -4,10 +4,13 @@ import com.zpedroo.farmsword.enums.EnchantProperty;
 import com.zpedroo.farmsword.objects.Enchant;
 import com.zpedroo.farmsword.objects.FarmMob;
 import com.zpedroo.farmsword.utils.FileUtils;
+import com.zpedroo.farmsword.utils.formatter.NumberFormatter;
 import lombok.Getter;
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.craftbukkit.libs.jline.internal.Nullable;
 import org.bukkit.entity.EntityType;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,9 +35,8 @@ public class DataCache {
     private Map<EntityType, FarmMob> getDamageMobsFromConfig() {
         FileUtils.Files file = FileUtils.Files.CONFIG;
         Map<EntityType, FarmMob> ret = new HashMap<>(4);
-        String where = "Damage-Mobs-Exp";
-        for (String mobName : FileUtils.get().getSection(file, where)) {
-            FarmMob farmMob = loadFarmMob(where, mobName, file);
+        for (String str : FileUtils.get().getStringList(file, "Damage-Mobs")) {
+            FarmMob farmMob = loadFarmMob(str);
             if (farmMob == null) continue;
 
             EntityType entityType = farmMob.getEntityType();
@@ -47,9 +49,8 @@ public class DataCache {
     private Map<EntityType, FarmMob> getKillMobsFromConfig() {
         FileUtils.Files file = FileUtils.Files.CONFIG;
         Map<EntityType, FarmMob> ret = new HashMap<>(4);
-        String where = "Kill-Mobs-Exp";
-        for (String mobName : FileUtils.get().getSection(file, where)) {
-            FarmMob farmMob = loadFarmMob(where, mobName, file);
+        for (String str : FileUtils.get().getStringList(file, "Kill-Mobs")) {
+            FarmMob farmMob = loadFarmMob(str);
             if (farmMob == null) continue;
 
             EntityType entityType = farmMob.getEntityType();
@@ -65,7 +66,7 @@ public class DataCache {
         int initialLevel = FileUtils.get().getInt(file, "Enchants." + enchantName + ".level.initial");
         int maxLevel = FileUtils.get().getInt(file, "Enchants." + enchantName + ".level.max");
         int requiredLevel = FileUtils.get().getInt(file, "Enchants." + enchantName + ".level.requirement-per-upgrade");
-        int costPerLevel = FileUtils.get().getInt(file, "Enchants." + enchantName + ".cost-per-level");
+        BigInteger costPerLevel = NumberFormatter.getInstance().filter(FileUtils.get().getString(file, "Enchants." + enchantName + ".cost-per-level", "0"));
         double multiplierPerLevel = FileUtils.get().getDouble(file, "Enchants." + enchantName + ".multiplier-per-level");
 
         Map<EnchantProperty, Number> enchantProperties = new HashMap<>(EnchantProperty.values().length);
@@ -74,13 +75,18 @@ public class DataCache {
         return new Enchant(enchantName, initialLevel, maxLevel, requiredLevel, costPerLevel, enchantProperties);
     }
 
-    private FarmMob loadFarmMob(String where, String mobName, FileUtils.Files file) {
-        EntityType entityType = getEntityTypeByName(mobName);
+    @Nullable
+    private FarmMob loadFarmMob(String str) {
+        String[] split = str.split(",");
+        if (split.length <= 2) return null;
+
+        EntityType entityType = getEntityTypeByName(split[0].toUpperCase());
         if (entityType == null) return null;
 
-        double expAmount = FileUtils.get().getDouble(file, where + "." + mobName);
+        double expAmount = Double.parseDouble(split[1]);
+        BigInteger pointsAmount = NumberFormatter.getInstance().filter(split[2]);
 
-        return new FarmMob(entityType, expAmount);
+        return new FarmMob(entityType, expAmount, pointsAmount);
     }
 
     private EntityType getEntityTypeByName(String name) {
