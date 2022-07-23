@@ -48,6 +48,7 @@ Farm-Sword-Item:
   type: DIAMOND_SWORD
   glow: true
   hide-attributes: true
+  unbreakable: true
   name: '&aEspada de Farm'
   lore:
     - '&7Afiação: &f{damage_all}'
@@ -73,7 +74,7 @@ Quality:
   initial: 0
   max: 5
   item-level-per-quality: 100
-  cost-per-quality: 5000
+  cost-per-quality: 15
   bonus-per-quality: 0.4
   symbol: '✯'
   complete-color: '&e'
