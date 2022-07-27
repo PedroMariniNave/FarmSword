@@ -22,5 +22,5 @@ public class Settings {
 
     public static final String STACK_AMOUNT_METADATA = FileUtils.get().getString(FileUtils.Files.CONFIG, "Settings.stack-amount-metadata");
 
-    public static final String KILLER_NAME_METADATA = FileUtils.get().getString(FileUtils.Files.CONFIG, "Settings.killer-name-metadata");
+    public static final String KILLER_METADATA = FileUtils.get().getString(FileUtils.Files.CONFIG, "Settings.killer-metadata");
 }

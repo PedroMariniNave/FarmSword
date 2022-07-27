@@ -6,7 +6,7 @@ Settings:
   prevent-player-hit: true
   quality-currency: 'cash' # MultiEconomy compatibility. Empty or null = plugin points
   stack-amount-metadata: 'MobKilledAmount'
-  killer-name-metadata: 'MobKillerName' # útil quando o plugin não conseguir encontrar o jogador
+  killer-metadata: 'MobKiller' # útil quando o plugin não conseguir encontrar o jogador
 
 Messages:
   player-hit: '&cVocê não pode atacar jogadores com uma Espada Farm!'

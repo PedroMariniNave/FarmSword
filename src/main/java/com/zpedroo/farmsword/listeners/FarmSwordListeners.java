@@ -10,7 +10,6 @@ import com.zpedroo.farmsword.utils.config.Titles;
 import com.zpedroo.farmsword.utils.farmsword.FarmSwordUtils;
 import com.zpedroo.farmsword.utils.formatter.NumberFormatter;
 import org.apache.commons.lang.StringUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -93,10 +92,9 @@ public class FarmSwordListeners implements Listener {
     private Player getKiller(LivingEntity entity) {
         Player killer = entity.getKiller();
         if (killer == null) {
-            if (!entity.hasMetadata(Settings.KILLER_NAME_METADATA)) return null;
+            if (!entity.hasMetadata(Settings.KILLER_METADATA)) return null;
 
-            String killerName = entity.getMetadata(Settings.KILLER_NAME_METADATA).get(0).asString();
-            killer = Bukkit.getPlayer(killerName);
+            killer = (Player) entity.getMetadata(Settings.KILLER_METADATA).get(0).value();
         }
 
         return killer;
