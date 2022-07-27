@@ -19,4 +19,6 @@ public class Settings {
     public static final boolean PREVENT_PLAYER_HIT = FileUtils.get().getBoolean(FileUtils.Files.CONFIG, "Settings.prevent-player-hit");
 
     public static final Currency QUALITY_CURRENCY = CurrencyAPI.getCurrency(FileUtils.get().getString(FileUtils.Files.CONFIG, "Settings.quality-currency"));
+
+    public static final String STACK_AMOUNT_METADATA = FileUtils.get().getString(FileUtils.Files.CONFIG, "Settings.stack-amount-metadata");
 }

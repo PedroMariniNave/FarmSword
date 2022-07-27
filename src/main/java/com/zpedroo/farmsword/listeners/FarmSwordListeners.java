@@ -10,6 +10,7 @@ import com.zpedroo.farmsword.utils.config.Titles;
 import com.zpedroo.farmsword.utils.farmsword.FarmSwordUtils;
 import com.zpedroo.farmsword.utils.formatter.NumberFormatter;
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,6 +19,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+
+import java.math.BigInteger;
 
 public class FarmSwordListeners implements Listener {
 
@@ -57,13 +60,17 @@ public class FarmSwordListeners implements Listener {
         ItemStack item = player.getItemInHand();
         if (!FarmSwordUtils.isFarmSword(item)) return;
 
-        EntityType entityType = event.getEntity().getType();
+        Entity entity = event.getEntity();
+        EntityType entityType = entity.getType();
         FarmMob farmMob = DataManager.getInstance().getKillFarmMobByType(entityType);
         if (farmMob == null) return;
 
         double expAmount = farmMob.getExpAmount();
+        BigInteger stackAmount = getStackAmount(entity);
+        BigInteger pointsAmount = farmMob.getPointsAmount().multiply(stackAmount);
+
         ItemStack newItem = FarmSwordUtils.addItemExperience(item, expAmount);
-        newItem = FarmSwordUtils.addItemPoints(newItem, farmMob.getPointsAmount());
+        newItem = FarmSwordUtils.addItemPoints(newItem, pointsAmount);
         player.setItemInHand(newItem);
     }
 
@@ -79,6 +86,12 @@ public class FarmSwordListeners implements Listener {
         event.setDamage(0);
 
         player.sendMessage(Messages.PLAYER_HIT);
+    }
+
+    private BigInteger getStackAmount(Entity entity) {
+        if (!entity.hasMetadata(Settings.STACK_AMOUNT_METADATA)) return BigInteger.ONE;
+
+        return new BigInteger(entity.getMetadata(Settings.STACK_AMOUNT_METADATA).get(0).asString());
     }
 
     private void sendUpgradeTitle(Player player, int oldLevel, int newLevel) {
