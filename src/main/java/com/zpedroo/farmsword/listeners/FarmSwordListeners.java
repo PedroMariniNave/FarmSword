@@ -10,8 +10,10 @@ import com.zpedroo.farmsword.utils.config.Titles;
 import com.zpedroo.farmsword.utils.farmsword.FarmSwordUtils;
 import com.zpedroo.farmsword.utils.formatter.NumberFormatter;
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -54,7 +56,7 @@ public class FarmSwordListeners implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onMobKill(EntityDeathEvent event) {
-        Player player = event.getEntity().getKiller();
+        Player player = getKiller(event.getEntity());
         if (player == null) return;
 
         ItemStack item = player.getItemInHand();
@@ -86,6 +88,18 @@ public class FarmSwordListeners implements Listener {
         event.setDamage(0);
 
         player.sendMessage(Messages.PLAYER_HIT);
+    }
+
+    private Player getKiller(LivingEntity entity) {
+        Player killer = entity.getKiller();
+        if (killer == null) {
+            if (!entity.hasMetadata(Settings.KILLER_NAME_METADATA)) return null;
+
+            String killerName = entity.getMetadata(Settings.KILLER_NAME_METADATA).get(0).asString();
+            killer = Bukkit.getPlayer(killerName);
+        }
+
+        return killer;
     }
 
     private BigInteger getStackAmount(Entity entity) {

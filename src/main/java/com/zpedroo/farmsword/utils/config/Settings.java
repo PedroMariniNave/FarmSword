@@ -21,4 +21,6 @@ public class Settings {
     public static final Currency QUALITY_CURRENCY = CurrencyAPI.getCurrency(FileUtils.get().getString(FileUtils.Files.CONFIG, "Settings.quality-currency"));
 
     public static final String STACK_AMOUNT_METADATA = FileUtils.get().getString(FileUtils.Files.CONFIG, "Settings.stack-amount-metadata");
+
+    public static final String KILLER_NAME_METADATA = FileUtils.get().getString(FileUtils.Files.CONFIG, "Settings.killer-name-metadata");
 }
