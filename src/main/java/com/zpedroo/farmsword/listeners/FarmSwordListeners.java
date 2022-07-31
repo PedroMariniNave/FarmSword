@@ -66,9 +66,9 @@ public class FarmSwordListeners implements Listener {
         FarmMob farmMob = DataManager.getInstance().getKillFarmMobByType(entityType);
         if (farmMob == null) return;
 
-        double expAmount = farmMob.getExpAmount();
         BigInteger stackAmount = getStackAmount(entity);
         BigInteger pointsAmount = farmMob.getPointsAmount().multiply(stackAmount);
+        double expAmount = farmMob.getExpAmount() * stackAmount.doubleValue();
 
         ItemStack newItem = FarmSwordUtils.addItemExperience(item, expAmount);
         newItem = FarmSwordUtils.addItemPoints(newItem, pointsAmount);
