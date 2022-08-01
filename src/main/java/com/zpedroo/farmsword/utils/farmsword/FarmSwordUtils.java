@@ -137,7 +137,8 @@ public class FarmSwordUtils {
     public static BigInteger getEnchantUpgradeCost(@NotNull ItemStack item, @Nullable Enchant enchant) {
         if (enchant == null) return BigInteger.ZERO;
 
-        int enchantLevel = getEnchantmentLevel(item, enchant) + 1; // level can be zero
+        int enchantLevel = getEnchantmentLevel(item, enchant);
+        int nextLevel = enchantLevel + 1;
         BigInteger costPerLevel = enchant.getCostPerLevel();
 
         return BigInteger.valueOf(enchantLevel).multiply(costPerLevel);
