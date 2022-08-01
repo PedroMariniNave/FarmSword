@@ -1,6 +1,7 @@
 package com.zpedroo.farmsword;
 
 import com.zpedroo.farmsword.commands.FarmSwordCmd;
+import com.zpedroo.farmsword.hooks.PlaceholderAPIHook;
 import com.zpedroo.farmsword.listeners.FarmSwordListeners;
 import com.zpedroo.farmsword.listeners.PlayerGeneralListeners;
 import com.zpedroo.farmsword.listeners.PointsListeners;
@@ -37,6 +38,7 @@ public class FarmSword extends JavaPlugin {
         new Menus();
 
         registerListeners();
+        registerHooks();
         registerCommand(COMMAND, ALIASES, new FarmSwordCmd());
     }
 
@@ -44,6 +46,12 @@ public class FarmSword extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerGeneralListeners(), this);
         getServer().getPluginManager().registerEvents(new FarmSwordListeners(), this);
         getServer().getPluginManager().registerEvents(new PointsListeners(), this);
+    }
+
+    private void registerHooks() {
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new PlaceholderAPIHook(this).register();
+        }
     }
 
     private void registerCommand(String command, List<String> aliases, CommandExecutor executor) {
